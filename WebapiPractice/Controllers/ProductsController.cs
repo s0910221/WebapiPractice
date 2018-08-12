@@ -12,6 +12,7 @@ using WebapiPractice.Models;
 
 namespace WebapiPractice.Controllers
 {
+    [RoutePrefix("api/product")]
     public class ProductsController : ApiController
     {
         private FabricsEntities db = new FabricsEntities();
@@ -22,12 +23,16 @@ namespace WebapiPractice.Controllers
         }
 
         // GET: api/Products
+        [HttpGet]
+        [Route("")]
         public IQueryable<Product> GetProduct()
         {
             return db.Product;
         }
 
         // GET: api/Products/5
+        [HttpGet]
+        [Route("{id:int}")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
@@ -41,6 +46,8 @@ namespace WebapiPractice.Controllers
         }
 
         // PUT: api/Products/5
+        [HttpPut]
+        [Route("{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProduct(int id, Product product)
         {
@@ -76,6 +83,8 @@ namespace WebapiPractice.Controllers
         }
 
         // POST: api/Products
+        [HttpPost]
+        [Route("")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult PostProduct(Product product)
         {
@@ -91,6 +100,8 @@ namespace WebapiPractice.Controllers
         }
 
         // DELETE: api/Products/5
+        [HttpDelete]
+        [Route("{id:int}")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult DeleteProduct(int id)
         {
