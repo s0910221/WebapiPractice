@@ -12,7 +12,7 @@ namespace WebapiPractice
         {
             // Web API 設定和服務
             config.Filters.Add(new CustomExceptionAttribute());
-
+            config.EnableCors();
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
