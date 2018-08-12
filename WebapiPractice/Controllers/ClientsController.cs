@@ -31,9 +31,9 @@ namespace WebapiPractice.Controllers
 
 
         [Route("{id:int}", Name = nameof(GetClientById))]
-        [HttpGet]
+        [HttpPost]
         [ResponseType(typeof(Client))]
-        public IHttpActionResult GetClientById(int id)
+        public IHttpActionResult GetClientById([FromBody]int id)
         {
             Client client = db.Client.Find(id);
             if (client == null)
