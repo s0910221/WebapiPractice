@@ -32,9 +32,9 @@ namespace WebapiPractice.Controllers
 
         // GET: api/Products/5
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id:int}", Name = nameof(GetProductById))]
         [ResponseType(typeof(Product))]
-        public IHttpActionResult GetProduct(int id)
+        public IHttpActionResult GetProductById(int id)
         {
             Product product = db.Product.Find(id);
             if (product == null)
@@ -96,7 +96,7 @@ namespace WebapiPractice.Controllers
             db.Product.Add(product);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
+            return CreatedAtRoute(nameof(GetProductById), new { id = product.ProductId }, product);
         }
 
         // DELETE: api/Products/5
