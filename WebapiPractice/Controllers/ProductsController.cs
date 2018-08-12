@@ -25,9 +25,9 @@ namespace WebapiPractice.Controllers
         // GET: api/Products
         [HttpGet]
         [Route("")]
-        public IQueryable<Product> GetProduct()
+        public IHttpActionResult GetProduct()
         {
-            return db.Product;
+            return Ok(db.Product);
         }
 
         // GET: api/Products/5

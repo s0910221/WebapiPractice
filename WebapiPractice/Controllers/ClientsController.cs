@@ -24,9 +24,9 @@ namespace WebapiPractice.Controllers
 
         [Route("")]
         [HttpGet]
-        public IQueryable<Client> GetClient()
+        public IHttpActionResult GetClient()
         {
-            return db.Client;
+            return Ok(db.Client);
         }
 
 
@@ -46,9 +46,16 @@ namespace WebapiPractice.Controllers
 
         [Route("{id:int}/order")]
         [HttpGet]
-        public IHttpActionResult GetOrderByClientId(int id)
+        public HttpResponseMessage GetOrderByClientId(int id)
         {
-            return Ok(db.Order.Where(o => o.ClientId == id).ToList());
+            var orders = db.Order.Where(p => p.ClientId == id);
+            return new HttpResponseMessage()
+            {
+                ReasonPhrase = "HELLO",
+                StatusCode = HttpStatusCode.OK,
+                Content = new ObjectContent<IQueryable<Order>>(orders,
+                    GlobalConfiguration.Configuration.Formatters.JsonFormatter)
+            };
         }
 
         [Route("{id:int}/order/{date:datetime}")]
