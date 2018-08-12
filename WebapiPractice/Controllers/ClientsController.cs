@@ -8,10 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using WebapiPractice.Filters;
 using WebapiPractice.Models;
 
 namespace WebapiPractice.Controllers
 {
+    //    [CustomException]
     [RoutePrefix("api/client")]
     public class ClientsController : ApiController
     {
@@ -31,17 +33,21 @@ namespace WebapiPractice.Controllers
 
 
         [Route("{id:int}", Name = nameof(GetClientById))]
-        [HttpPost]
         [ResponseType(typeof(Client))]
-        public IHttpActionResult GetClientById([FromBody]int id)
+        public HttpResponseMessage GetClientById(int id)
         {
             Client client = db.Client.Find(id);
             if (client == null)
             {
-                return NotFound();
+                throw new ArgumentException("Not Found");
+                //return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-
-            return Ok(client);
+            return new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new ObjectContent<Client>(client,
+                    GlobalConfiguration.Configuration.Formatters.JsonFormatter)
+            };
         }
 
         [Route("{id:int}/order")]

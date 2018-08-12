@@ -186,6 +186,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Filters\CustomExceptionAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Models\Client.cs">
       <DependentUpon>Fabric.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomHttpError.cs" />
     <Compile Include="Models\Fabric.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
